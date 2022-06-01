@@ -1,1 +1,1 @@
-# Location of Blazoe Webassembly
+# Location of Blazor Webassembly
