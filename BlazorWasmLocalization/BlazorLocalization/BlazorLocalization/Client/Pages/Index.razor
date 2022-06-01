@@ -1,0 +1,16 @@
+﻿@page "/"
+@using BlazorLocalization.Client.Services
+@inject IStringLocalizer<ResourceLanguage> localizer
+@inject HttpClient http
+@inject LocalizedMessageService localizedMessageService
+
+<PageTitle>Index</PageTitle>
+
+<h1>@localizer["HelloWorld"]</h1>
+
+<div>
+    <img src="@localizer["Image"]"/>
+</div>
+
+<div class="localized-text">@localizedBackendText</div>
+

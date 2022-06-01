@@ -1,0 +1,48 @@
+﻿@inject NavigationManager NavManager
+@using System.Globalization
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Http.Extensions
+@using Microsoft.AspNetCore.Localization
+@using Microsoft.JSInterop
+@inject IStringLocalizer<ResourceLanguage> localizer
+
+<div class="top-row px-4">
+    <ul>
+        <li><div class="language-selector" @onclick="() => OnSelected(English)">En</div></li>
+        <li><div class="language-selector" @onclick="() => OnSelected(Italian)"> It</div></li>
+        <li><div class="language-selector" @onclick="() => OnSelected(Ukraina)">Уk</div></li>
+    </ul>
+</div>
+
+@code
+{
+    private string English = "en";
+    private string Italian = "it";
+    private string Ukraina = "uk";
+
+    [Inject]
+    public IJSRuntime? JsRuntime { get; set; }
+    CultureInfo[] cultures = new[]
+            {
+            new CultureInfo("en"),
+            new CultureInfo("it")
+    };
+    CultureInfo Culture
+    {
+        get => CultureInfo.CurrentCulture;
+        set
+        {
+            if (CultureInfo.CurrentCulture != value)
+            {
+                var js = (IJSInProcessRuntime)JsRuntime!;
+                js.InvokeVoid("blazorLanguage.set", value.Name);
+                NavManager.NavigateTo(NavManager.Uri, forceLoad: true);
+            }
+        }
+    }
+
+    private void OnSelected(string language)
+    {
+        Culture = new CultureInfo(language);
+    }
+}
