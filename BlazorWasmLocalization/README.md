@@ -1,1 +1,1 @@
-# Location-p2
+# Location of Blazoe Webassembly
