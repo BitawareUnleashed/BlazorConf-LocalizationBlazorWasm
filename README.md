@@ -1,1 +1,1 @@
-# Location of Blazor Webassembly
+# Localization of Blazor Webassembly
